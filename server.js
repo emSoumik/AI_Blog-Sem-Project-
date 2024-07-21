@@ -1,27 +1,24 @@
 const articleRouter = require("./routes/articles")
 const express = require("express")
 const path = require("path")
-const app = express()
+const Article = require('./models/article')
 const bcrypt = require("bcrypt")
+const mongoose = require("mongoose")
+const app = express()
+
+
+mongoose.connect('mongodb://localhost/ai_blog_gen')
 
 app.set('view engine', 'ejs')
 
+app.use(express.urlencoded({ extended: false})) //to access article from info using req.body
+
 app.use("/articles", articleRouter)
 
-app.use(express.urlencoded({ extended: false}))
 
-app.get("/", (req, res) => {
-    const articles = [{
-        title: "Welcome to my blog",
-        createdAt: new Date(),
-        description: "This is my first blog post"
-    },
-    {
-        title: "Welcome to my blog2",
-        createdAt: new Date(),
-        description: "This is my second blog post"
-    }]
-    res.render("index", { articles: articles})
+app.get("/", async (req, res) => {
+    const articles = await Article.find().sort({ createdAt: 'desc'})
+    res.render("articles/index", { articles: articles})
 })
 
 

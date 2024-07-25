@@ -29,4 +29,14 @@ router.post("/", async (req, res) => {
     }
 })
 
+router.delete("/:id", async (req, res) => {
+    try {
+        await Article.findByIdAndDelete(req.params.id)
+        res.redirect("/")
+    } catch (e) {
+        console.error(e)
+        res.redirect("/")
+    }
+})
+
 module.exports = router

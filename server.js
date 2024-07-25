@@ -4,6 +4,7 @@ const path = require("path")
 const Article = require('./models/article')
 const bcrypt = require("bcrypt")
 const mongoose = require("mongoose")
+const methodOverride = require("method-override")
 const app = express()
 
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false})) //to access article from info us
 
 app.use("/articles", articleRouter)
 
+app.use(methodOverride('_method'))
 
 app.get("/login", (req, res) => {
     res.render("login") 
@@ -59,6 +61,17 @@ app.post("/register", async (req, res) => {
 
 // Serve static files from the "public" directory
 app.use(express.static("public"))
+
+// Route to delete an article
+app.delete("/articles/:id", async (req, res) => {
+    try {
+        await Article.findByIdAndDelete(req.params.id)
+        res.redirect("/")
+    } catch (e) {
+        console.error(e)
+        res.redirect("/")
+    }
+})
 
 app.listen(5000, () => {
     console.log("Server running on port 5000")

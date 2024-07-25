@@ -5,3 +5,4 @@ To deploy the code in the terminal of vscode:
 3) choose the ditrectory
 4) npm init -y 
 5) run: npm i dependencies (or) npm i mongoose express ejs
+6) npm run devStart

@@ -16,17 +16,18 @@ app.use(express.urlencoded({ extended: false})) //to access article from info us
 app.use("/articles", articleRouter)
 
 
+app.get("/login", (req, res) => {
+    res.render("login") 
+})
+
+app.get("/articles/new", (req, res) => {
+    res.render("articles/new", { article: {} })
+})
+
 app.get("/", async (req, res) => {
     const articles = await Article.find().sort({ createdAt: 'desc'})
     res.render("articles/index", { articles: articles})
 })
-
-
-
-
-
-
-
 
 app.get("/login", (req, res) => {
     res.render("login.ejs")
@@ -55,6 +56,9 @@ app.post("/register", async (req, res) => {
     }
     console.log(users)
 })
+
+// Serve static files from the "public" directory
+app.use(express.static("public"))
 
 app.listen(5000, () => {
     console.log("Server running on port 5000")

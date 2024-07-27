@@ -8,11 +8,7 @@ const methodOverride = require("method-override")
 const app = express()
 
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000 // Increase timeout to 30 seconds
-})
+mongoose.connect('mongodb+srv://abhishek:111Proto111@cluster1.8vsts47.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1')
 
 app.set('view engine', 'ejs')
 

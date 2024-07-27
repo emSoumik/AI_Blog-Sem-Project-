@@ -11,16 +11,20 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "dompurify": "^3.1.6",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-flash": "^0.0.2",
     "express-session": "^1.18.0",
+    "jsdom": "^24.1.1",
     "marked": "^13.0.2",
     "method-override": "^3.0.0",
     "mongoose": "^8.4.4",
+    "netlify-lambda": "^2.0.16",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
+    "serverless-http": "^3.2.0",
     "slugify": "^1.6.6"
   },
   "devDependencies": {

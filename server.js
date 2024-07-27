@@ -8,7 +8,11 @@ const methodOverride = require("method-override")
 const app = express()
 
 
-mongoose.connect('mongodb://localhost/ai_blog_gen')
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000 // Increase timeout to 30 seconds
+})
 
 app.set('view engine', 'ejs')
 

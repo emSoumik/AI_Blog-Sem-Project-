@@ -14,10 +14,11 @@ mongoose.connect('mongodb+srv://swatikasn:Xga5IRUbD80w2es5@cluster0.5shnu.mongod
 app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({ extended: false})) //to access article from info using req.body
-
+app.use(methodOverride('_method'))
 app.use("/articles", articleRouter)
 
-app.use(methodOverride('_method'))
+// Add this log before using the articleRouter
+console.log("Setting up articleRouter");
 
 app.get("/login", (req, res) => {
     res.render("login") 
@@ -31,6 +32,7 @@ app.get("/", async (req, res) => {
     const articles = await Article.find().sort({ createdAt: 'desc'})
     res.render("articles/index", { articles: articles})
 })
+
 
 app.get("/login", (req, res) => {
     res.render("login.ejs")
@@ -73,6 +75,12 @@ app.delete("/articles/:id", async (req, res) => {
         res.redirect("/")
     }
 })
+
+// Add a catch-all route at the end
+app.use((req, res, next) => {
+    console.log(`Unhandled request: ${req.method} ${req.originalUrl}`);
+    res.status(404).send('Not Found');
+});
 
 app.listen(5000, () => {
     console.log("Server running on port 5000")

@@ -17,7 +17,7 @@ const articleSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   },
   slug: {
     type: String,
@@ -27,10 +27,9 @@ const articleSchema = new mongoose.Schema({
 });
 
 articleSchema.pre('validate', function(next) {
-  if(this.title) {
-    this.slug = slugify(this.title, {lower: true, strict: true})
+  if (this.title) {
+    this.slug = slugify(this.title, { lower: true, strict: true })
   }
-
   next()
 })
 

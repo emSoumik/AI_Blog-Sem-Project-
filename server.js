@@ -7,8 +7,9 @@ const mongoose = require("mongoose")
 const methodOverride = require("method-override")
 const app = express()
 
-
-mongoose.connect('mongodb+srv://abhishek:111Proto111@cluster1.8vsts47.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1')
+mongoose.connect('mongodb+srv://swatikasn:Xga5IRUbD80w2es5@cluster0.5shnu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 app.set('view engine', 'ejs')
 

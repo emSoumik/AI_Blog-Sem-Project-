@@ -1,6 +1,6 @@
 # ThoughtThread
 
-A modern blogging platform with an Apple-inspired design, built with Node.js, Express, and MongoDB.
+A modern blogging platform, built with Node.js, Express, and MongoDB.
 
 ![ThoughtThread Screenshot](public/images/screenshot.png)
 
@@ -102,7 +102,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Screenshots
 
 ### Home Page
-![Home Page](public/images/home.png)
+![Home Page](public/images/screenshot.png)
 
 ### Article Editor
 ![Article Editor](public/images/editor.png)

@@ -1,6 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const Article = require("./../models/article")
+const slugify = require('slugify');
+
+console.log("Article routes loaded");
 
 router.get('/new', (req, res) => {
     res.render('articles/new', { article: new Article()})
@@ -38,5 +41,55 @@ router.delete("/:id", async (req, res) => {
         res.redirect("/")
     }
 })
+
+router.put("/:slug", async (req, res, next) => {
+    console.log("PUT route hit with slug:", req.params.slug);
+    console.log("Request body:", req.body);
+
+    try {
+        let article = await Article.findOne({ slug: req.params.slug });
+        if (article == null) {
+            console.log("Article not found");
+            return res.redirect('/');
+        }
+        
+        article.title = req.body.title;
+        article.description = req.body.description;
+        article.markdown = req.body.markdown;
+        article.slug = slugify(req.body.title, { lower: true, strict: true });
+
+        article = await article.save();
+        console.log("Article updated successfully:", article);
+        res.redirect(`/articles/${article.slug}`);
+    } catch (e) {
+        console.error("Error updating article:", e);
+        res.render(`articles/edit`, { article: req.body });
+    }
+});
+
+router.get("/edit/:slug", async (req, res) => {
+    const article = await Article.findOne({ slug: req.params.slug });
+    if (!article) {
+        return res.redirect("/");
+    }
+    res.render("articles/edit", { article: article });
+});
+
+// Also add a catch-all route to log any requests that don't match other routes
+router.use((req, res, next) => {
+    console.log(`Unhandled request: ${req.method} ${req.url}`);
+    next();
+});
+
+// Add this catch-all route at the end of your router
+router.use((req, res, next) => {
+    console.log(`Unhandled article request: ${req.method} ${req.url}`);
+    next();
+});
+
+// Add this near the top of your route definitions
+router.get('/test', (req, res) => {
+    res.send('Article router is working');
+});
 
 module.exports = router

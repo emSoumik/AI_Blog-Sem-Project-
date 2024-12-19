@@ -2,10 +2,11 @@ const express = require("express")
 const router = express.Router()
 const Article = require("./../models/article")
 const slugify = require('slugify');
+const { checkAuthenticated } = require('../middleware/auth')
 
 console.log("Article routes loaded");
 
-router.get('/new', (req, res) => {
+router.get('/new', checkAuthenticated, (req, res) => {
     res.render('articles/new', { article: new Article()})
 })
 
@@ -17,7 +18,7 @@ router.get('/:slug', async (req, res) => {
     res.render('articles/show', { article: article })
 })
 
-router.post("/", async (req, res) => {
+router.post("/", checkAuthenticated, async (req, res) => {
     let article = new Article({
         title: req.body.title,
         description: req.body.description,
@@ -32,7 +33,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", checkAuthenticated, async (req, res) => {
     try {
         await Article.findByIdAndDelete(req.params.id)
         res.redirect("/")

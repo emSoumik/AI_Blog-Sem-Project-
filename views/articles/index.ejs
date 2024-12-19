@@ -86,6 +86,31 @@
             background-color: #f8f9fa;
             text-align: center;
         }
+        
+        .modal-content {
+            border: none;
+            border-radius: 15px;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-item {
+            padding: 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -98,8 +123,9 @@
             <a href="/" class="nav-link active mb-2">
                 <i class="fas fa-home me-2"></i> Home
             </a>
-            <a href="/articles" class="nav-link mb-2">
-                <i class="fas fa-newspaper me-2"></i> Articles
+            
+            <a href="#" class="nav-link mb-2" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                <i class="fas fa-info-circle me-2"></i> About
             </a>
             <% if (user) { %>
                 <div class="nav-link mb-2">
@@ -189,5 +215,54 @@
             </div>
         </footer>
     </div>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-primary text-white" style="background: linear-gradient(45deg, #6b48ff, #0d6efd);">
+                    <h5 class="modal-title" id="aboutModalLabel">About ThoughtThread</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="feature-card mb-4 p-4 rounded" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                                <i class="fas fa-feather-alt fa-2x mb-3 text-primary"></i>
+                                <h4>Express Your Ideas</h4>
+                                <p>Share your thoughts, stories, and insights with our growing community of writers and readers.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-card mb-4 p-4 rounded" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                                <i class="fas fa-robot fa-2x mb-3 text-success"></i>
+                                <h4>AI-Powered</h4>
+                                <p>Coming soon: Generate and enhance your content with our advanced AI integration.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <p class="lead">ThoughtThread is a modern blogging platform that combines the power of human creativity with artificial intelligence.</p>
+                        <div class="stats d-flex justify-content-around mt-4">
+                            <div class="stat-item">
+                                <i class="fas fa-users fa-2x text-info"></i>
+                                <h5 class="mt-2">Growing Community</h5>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-shield-alt fa-2x text-success"></i>
+                                <h5 class="mt-2">Secure Platform</h5>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-bolt fa-2x text-warning"></i>
+                                <h5 class="mt-2">Fast & Responsive</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

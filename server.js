@@ -8,7 +8,7 @@ const methodOverride = require("method-override")
 const app = express()
 
 
-mongoose.connect('mongodb+srv://abhishek:111Proto111@cluster1.8vsts47.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1')
+mongoose.connect('mongodb+srv://abhisheknair616:faceless123@cluster0.8eyay.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 
 app.set('view engine', 'ejs')
 
@@ -19,7 +19,7 @@ app.use("/articles", articleRouter)
 app.use(methodOverride('_method'))
 
 app.get("/login", (req, res) => {
-    res.render("login") 
+    res.render("login")
 })
 
 app.get("/articles/new", (req, res) => {

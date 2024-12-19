@@ -20,6 +20,7 @@
     "jsdom": "^24.1.1",
     "marked": "^13.0.2",
     "method-override": "^3.0.0",
+    "mongodb": "^6.8.0",
     "mongoose": "^8.4.4",
     "netlify-lambda": "^2.0.16",
     "passport": "^0.7.0",

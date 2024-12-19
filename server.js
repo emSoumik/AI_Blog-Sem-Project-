@@ -91,11 +91,14 @@ app.post("/login", passport.authenticate('local', {
 
 app.post("/register", async (req, res) => {
     try {
-        // Check if user already exists
-        const existingUser = await User.findOne({ email: req.body.email });
+        // Check if user already exists by email only
+        const existingUser = await User.findOne({ 
+            email: req.body.email.toLowerCase() 
+        });
+
         if (existingUser) {
-            req.flash('error', 'Email already registered');
-            return res.redirect('/register');
+            req.flash('info', 'Email already registered. Please login instead.');
+            return res.redirect('/login');
         }
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);

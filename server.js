@@ -17,9 +17,10 @@ mongoose.connect('mongodb+srv://abhisheknair616:faceless123@cluster0.8eyay.mongo
 
 app.set('view engine', 'ejs')
 
-app.use(express.urlencoded({ extended: false})) //to access article from info using req.body
-app.use(express.json());
-app.use(flash());
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+app.use(methodOverride('_method'))
+app.use(flash())
 app.use(session({
     secret: 'your-secret-key',
     resave: false,
@@ -29,8 +30,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/articles", articleRouter)
-
-app.use(methodOverride('_method'))
 
 passport.use(new LocalStrategy({ usernameField: 'email' },
     async (email, password, done) => {

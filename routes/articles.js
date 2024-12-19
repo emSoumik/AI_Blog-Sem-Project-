@@ -43,38 +43,34 @@ router.delete("/:id", checkAuthenticated, async (req, res) => {
     }
 })
 
-router.put("/:slug", async (req, res, next) => {
-    console.log("PUT route hit with slug:", req.params.slug);
-    console.log("Request body:", req.body);
-
+router.put("/:slug", async (req, res) => {
     try {
-        let article = await Article.findOne({ slug: req.params.slug });
-        if (article == null) {
-            console.log("Article not found");
-            return res.redirect('/');
+        let article = await Article.findOne({ slug: req.params.slug })
+        if (!article) {
+            return res.redirect('/')
         }
         
-        article.title = req.body.title;
-        article.description = req.body.description;
-        article.markdown = req.body.markdown;
-        article.slug = slugify(req.body.title, { lower: true, strict: true });
-
-        article = await article.save();
-        console.log("Article updated successfully:", article);
-        res.redirect(`/articles/${article.slug}`);
-    } catch (e) {
-        console.error("Error updating article:", e);
-        res.render(`articles/edit`, { article: req.body });
+        article.title = req.body.title
+        article.description = req.body.description
+        article.markdown = req.body.markdown
+        
+        article = await article.save()
+        res.redirect(`/articles/${article.slug}`)
+    } catch (error) {
+        console.error('Error updating article:', error)
+        res.render('articles/edit', { article: req.body })
     }
-});
+})
 
-router.get("/edit/:slug", async (req, res) => {
-    const article = await Article.findOne({ slug: req.params.slug });
-    if (!article) {
-        return res.redirect("/");
+router.get('/edit/:slug', async (req, res) => {
+    try {
+        const article = await Article.findOne({ slug: req.params.slug })
+        res.render('articles/edit', { article: article })
+    } catch (error) {
+        console.error('Error fetching article:', error)
+        res.redirect('/')
     }
-    res.render("articles/edit", { article: article });
-});
+})
 
 // Also add a catch-all route to log any requests that don't match other routes
 router.use((req, res, next) => {

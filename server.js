@@ -73,6 +73,12 @@ app.delete("/articles/:id", async (req, res) => {
     }
 })
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000")
+// Add a catch-all route at the end
+app.use((req, res, next) => {
+    console.log(`Unhandled request: ${req.method} ${req.originalUrl}`);
+    res.status(404).send('Not Found');
+});
+
+app.listen(5000, () => {
+    console.log("Server running on port 5000")
 })

@@ -10,10 +10,10 @@
         :root {
             --dark-bg: #000000;
             --dark-surface: #1c1c1e;
-            --accent-color: #0071e3;
-            --accent-gradient: linear-gradient(135deg, #0071e3 0%, #47a3ff 100%);
+            --accent-color: #8A2BE2;
+            --accent-gradient: linear-gradient(135deg, #8A2BE2 0%, #9370DB 100%);
             --text-primary: #ffffff;
-            --text-secondary: #86868b;
+            --text-secondary: #a8a8aa;
             --sidebar-width: 280px;
         }
 
@@ -144,12 +144,12 @@
             background: var(--accent-gradient);
             border: none;
             color: var(--text-primary);
-            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.2);
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
         }
         
         .auth-btn-signup:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 113, 227, 0.3);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
             color: var(--text-primary);
         }
         
@@ -175,7 +175,7 @@
         .sidebar .nav-link.active {
             color: var(--text-primary);
             background: var(--accent-gradient);
-            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
         }
         
         .sidebar .nav-link.active::before {
@@ -233,7 +233,7 @@
             justify-content: center;
             gap: 8px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.2);
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
             text-decoration: none;
             position: relative;
             overflow: hidden;
@@ -257,7 +257,7 @@
 
         .compose-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 113, 227, 0.3);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
             color: var(--text-primary);
         }
         
@@ -316,6 +316,7 @@
             position: relative;
             overflow: hidden;
             animation: fadeIn 0.6s ease-out;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
         
         .article-card::before {
@@ -353,7 +354,7 @@
         }
 
         .article-card .card-subtitle {
-            color: var(--text-secondary);
+            color: #a8a8aa;
             font-size: 0.875rem;
             display: flex;
             align-items: center;
@@ -361,7 +362,7 @@
         }
 
         .article-card .card-text {
-            color: var(--text-secondary);
+            color: #d1d1d6;
             margin: 1.5rem 0;
             line-height: 1.6;
             font-size: 1rem;
@@ -372,7 +373,7 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 1.5rem;
-            color: var(--text-secondary);
+            color: #a8a8aa;
             font-size: 0.875rem;
         }
 
@@ -487,10 +488,19 @@
             </div>
         </div>
 
-        <div class="auth-buttons">
-            <a href="/login" class="auth-btn auth-btn-login">Sign In</a>
-            <a href="/register" class="auth-btn auth-btn-signup">Sign Up</a>
-        </div>
+        <% if (isAuthenticated && user) { %>
+            <div class="user-info">
+                <div class="user-name"><%= user.name %></div>
+                <form action="/logout" method="POST">
+                    <button type="submit" class="auth-btn auth-btn-login">Sign Out</button>
+                </form>
+            </div>
+        <% } else { %>
+            <div class="auth-buttons">
+                <a href="/login" class="auth-btn auth-btn-login">Sign In</a>
+                <a href="/register" class="auth-btn auth-btn-signup">Sign Up</a>
+            </div>
+        <% } %>
 
         <a href="/articles/new" class="compose-btn">
             <i class="fas fa-plus"></i>

@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+node_modules
 package-lock.json
 yarn.lock
 
@@ -67,3 +68,9 @@ build/
 # Temporary files
 tmp/
 temp/
+
+# Next.js build output
+.next
+
+# Vercel build output
+.vercel

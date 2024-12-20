@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "setup": "npm install && echo 'Setup complete! Run npm run dev to start the development server.'"
+    "setup": "npm install && echo 'Setup complete! Run npm run dev to start the development server.'",
+    "build": "next build"
   },
   "keywords": [
     "blog",
